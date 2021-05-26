@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PostService } from '../posts.service';
 
@@ -14,10 +14,10 @@ export class CreatePostComponent implements OnInit {
 
   constructor(private postService: PostService, private router: Router) {
     this.postForm = new FormGroup({
-      title: new FormControl(''),
-      description: new FormControl(''),
-      content: new FormControl(''),
-      image: new FormControl(null),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required),
+      image: new FormControl(null, Validators.required),
     });
   }
 
@@ -39,7 +39,6 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit() {
     const postData = new FormData();
-    console.log(this.postForm.value.image);
 
     postData.append('image', this.postForm.value.image);
     postData.append('title', this.postForm.value.title);

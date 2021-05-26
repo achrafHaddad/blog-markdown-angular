@@ -9,7 +9,16 @@
           id="title"
           aria-describedby="emailHelp"
           formControlName="title"
+          required
         />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['title']) &&
+            postForm.controls.title.touched
+          "
+          >Title is required</span
+        >
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
@@ -18,7 +27,16 @@
           class="form-control"
           id="description"
           formControlName="description"
+          required
         />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['description']) &&
+            postForm.controls.description.touched
+          "
+          >Description is required</span
+        >
       </div>
       <div class="mb-3">
         <label for="image" class="form-label">Image</label>
@@ -27,7 +45,16 @@
           class="form-control"
           id="image"
           (change)="onImagePick($event)"
+          required
         />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['image']) &&
+            postForm.controls.image.touched
+          "
+          >Image is required</span
+        >
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">Content</label>
@@ -36,9 +63,23 @@
           rows="10"
           id="content"
           formControlName="content"
+          required
         ></textarea>
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['content']) &&
+            postForm.controls.content.touched
+          "
+          >Content is required</span
+        >
       </div>
-      <button type="submit" class="btn btn-success" (click)="onSubmit()">
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="onSubmit()"
+        [disabled]="!postForm.valid"
+      >
         Submit
       </button>
     </form>
