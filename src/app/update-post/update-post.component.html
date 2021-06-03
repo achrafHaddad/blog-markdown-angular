@@ -1,42 +1,86 @@
-<form [formGroup]="postForm">
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input
-      type="text"
-      class="form-control"
-      id="title"
-      formControlName="title"
+<div class="row mt-2">
+  <div class="col-lg-6">
+    <form [formGroup]="postForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          formControlName="title"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['title']) &&
+            postForm.controls.title.touched
+          "
+          >Title is required</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="description"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['description']) &&
+            postForm.controls.description.touched
+          "
+          >Description is required</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input
+          type="file"
+          class="form-control"
+          id="image"
+          (change)="onImagePick($event)"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['image']) &&
+            postForm.controls.image.touched
+          "
+          >Image is required</span
+        >
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea
+          class="form-control"
+          rows="10"
+          id="content"
+          formControlName="content"
+        ></textarea>
+        <span
+          class="text-danger"
+          *ngIf="
+            postForm.hasError('required', ['content']) &&
+            postForm.controls.content.touched
+          "
+          >Content is required</span
+        >
+      </div>
+      <button type="submit" class="btn btn-success" (click)="onUpdate()">
+        Update
+      </button>
+    </form>
+  </div>
+  <div class="col-lg-6">
+    <img
+      *ngIf="imgPreview"
+      width="100%"
+      class="mt-3"
+      [src]="imgPreview"
+      [alt]="postForm.value.title"
     />
   </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <input
-      type="text"
-      class="form-control"
-      id="description"
-      formControlName="description"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="image" class="form-label">Image</label>
-    <input
-      type="file"
-      class="form-control"
-      id="image"
-      (change)="onImagePick($event)"
-    />
-    <img height="130rem" [src]="imgPreview" [alt]="postForm.value.title" />
-  </div>
-  <div class="mb-3">
-    <label for="content" class="form-label">Content</label>
-    <textarea
-      class="form-control"
-      rows="10"
-      id="content"
-      formControlName="content"
-    ></textarea>
-  </div>
-  <button type="submit" class="btn btn-success" (click)="onUpdate()">
-    Update
-  </button>
-</form>
+</div>

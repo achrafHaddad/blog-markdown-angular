@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../posts.service';
 
@@ -19,10 +19,10 @@ export class UpdatePostComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.postForm = new FormGroup({
-      title: new FormControl(''),
-      description: new FormControl(''),
-      content: new FormControl(''),
-      image: new FormControl(null),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      content: new FormControl('', Validators.required),
+      image: new FormControl(null, Validators.required),
     });
   }
 
